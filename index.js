@@ -42,20 +42,26 @@ app.get('/api/v1/pets/owner', (req, res) => {
     const pet = pets.find(pet => pet.owner === owner);
 
     // send the pet as a response
-
+    
 });
 
 // get pet by name
 app.get('/api/v1/pets/:name', (req, res) => {
     // get the name from the request
+    const name = req.params.name;
 
 
     // find the pet in the pets array
     const pet = pets.find(pet => pet.name === name);
 
     // send the pet as a response
-
+    if (pet) {
+        res.json(pet);
+    } else {
+        res.status(404).json({ message: 'Pet not found' });
+    }
 });
+
 
 app.listen(PORT, () => {
     console.log('Server is listening on port ' + PORT);
